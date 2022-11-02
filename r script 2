@@ -1,0 +1,34 @@
+rm(list=ls())
+file <- readLines("exA.3dd")
+y_variation <- seq(0.1, 2, 0.1)
+for (delta_y in y_variation)
+{
+  # variation of the height of the frame
+  new_y <- 3.0 + delta_y
+  new_node_2 <- paste0("2 0.0", new_y, "0.0  0.0")
+  new_node_3 <- paste0("3 6.0", new_y, "0.0  0.0")
+  file[8] <- new_node_2
+  file[9] <- new_node_3
+  #write the new file
+  new_file_name <- paste0("frame3dd_case", delta_y, ".3dd")
+  writeLines(file, new_file_name)
+  #calculate the new syatem by call the frame3dd executable,make sure that the
+  #executable is in the same folder as the script
+  system_command <- paste0("frame3dd.exe.exe", new_file_name, " ", ".out")
+  res <- system(system_command, ignore.stdout = TRUE, ignore.stderr = TRUE)
+}  
+y_displacements <- c()
+#evaluate results by reading them in the above set up list
+for (delta_y in y_variation)
+{
+  file_name <- paste0("frame3dd_case", delta_y, ".3dd.out")
+  results <- readLines(file_name)
+  #collect y displacements at node 2
+  node2 <- results[50]
+  node2_split <- strsplit(node2, " ")[[1]]
+  y_disp <- as.numeric(y_disp_string)
+  y_displacements <- append(y_displacements)
+}
+#display the results
+print(y_displacements)
+plot(y_variation, y_displacements, xlab = "change in length", ylab = "x displacement", type = "l")
