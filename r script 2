@@ -26,9 +26,10 @@ for (delta_y in y_variation)
   #collect y displacements at node 2
   node2 <- results[50]
   node2_split <- strsplit(node2, " ")[[1]]
-  y_disp <- as.numeric(y_disp_string)
-  y_displacements <- append(y_displacements)
+  x_disp_string <- node2_split[10]
+  x_disp <- as.numeric(x_disp_string)
+  x_displacements <- append(x_displacements)
 }
 #display the results
-print(y_displacements)
-plot(y_variation, y_displacements, xlab = "change in length", ylab = "x displacement", type = "l")
+print(x_displacements)
+plot(y_variation, x_displacements, xlab = "change in length", ylab = "x displacement", type = "l")
