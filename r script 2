@@ -12,7 +12,7 @@ for (delta_y in y_variation)
   #write the new file
   new_file_name <- paste0("frame3dd_case", delta_y, ".3dd")
   writeLines(file, new_file_name)
-  #calculate the new syatem by call the frame3dd executable,make sure that the
+  #calculate the new system by call the frame3dd executable,make sure that the
   #executable is in the same folder as the script
   system_command <- paste0("frame3dd.exe.exe", new_file_name, " ", ".out")
   res <- system(system_command, ignore.stdout = TRUE, ignore.stderr = TRUE)
