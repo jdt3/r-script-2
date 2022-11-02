@@ -17,18 +17,18 @@ for (delta_y in y_variation)
   system_command <- paste0("frame3dd.exe.exe", new_file_name, " ", ".out")
   res <- system(system_command, ignore.stdout = TRUE, ignore.stderr = TRUE)
 }  
-y_displacements <- c()
+x_displacements <- c()
 #evaluate results by reading them in the above set up list
 for (delta_y in y_variation)
 {
   file_name <- paste0("frame3dd_case", delta_y, ".3dd.out")
   results <- readLines(file_name)
-  #collect y displacements at node 2
+  #collect x displacements at node 2
   node2 <- results[50]
   node2_split <- strsplit(node2, " ")[[1]]
   x_disp_string <- node2_split[10]
   x_disp <- as.numeric(x_disp_string)
-  x_displacements <- append(x_displacements)
+  x_displacements <- append(x_displacements, x_disp)
 }
 #display the results
 print(x_displacements)
